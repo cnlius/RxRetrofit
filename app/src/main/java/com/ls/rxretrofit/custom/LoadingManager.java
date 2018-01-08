@@ -1,4 +1,4 @@
-package com.ls.rxretrofit.http;
+package com.ls.rxretrofit.custom;
 
 import android.content.Context;
 

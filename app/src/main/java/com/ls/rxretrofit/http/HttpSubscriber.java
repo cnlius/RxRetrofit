@@ -5,6 +5,7 @@ import android.net.ParseException;
 import android.text.TextUtils;
 
 import com.google.gson.JsonParseException;
+import com.ls.rxretrofit.custom.LoadingManager;
 
 import org.json.JSONException;
 
