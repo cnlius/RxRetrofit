@@ -2,7 +2,9 @@ package com.ls.rxretrofit.api;
 
 import android.support.annotation.NonNull;
 
+import com.ls.rxretrofit.vo.HttpResult;
 import com.ls.rxretrofit.vo.JokeVo;
+import com.ls.rxretrofit.vo.Jokes;
 
 import java.util.Map;
 
@@ -20,12 +22,12 @@ public interface RxRetrofitApi {
 
     //test
     @GET("http://japi.juhe.cn/joke/content/text.from")
-    Observable<JokeVo> getJoke(
+    Observable<HttpResult<JokeVo>> getJokes(
             @NonNull @Query("key") String appKey
     );
 
     @GET("http://japi.juhe.cn/joke/content/text.from")
-    Observable<JokeVo> get(
+    Observable<Jokes> get(
             @Url String url,
             @FieldMap Map<String, String> params
     );

@@ -12,7 +12,7 @@ import com.ls.rxretrofit.api.RetrofitApi;
 import com.ls.rxretrofit.app.Constants;
 import com.ls.rxretrofit.databinding.ActivityRetrofitBinding;
 import com.ls.rxretrofit.utils.FileUtils;
-import com.ls.rxretrofit.vo.JokeVo;
+import com.ls.rxretrofit.vo.Jokes;
 
 import java.io.File;
 import java.io.IOException;
@@ -103,7 +103,7 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
         //【Get请求】
         //一般的get请求
         //异步
-//        getJoke(retrofitApi);
+//        getJokes(retrofitApi);
         //-------------------------------------------------
         //同步(同步会造成线程阻塞，避免使用同步，以下展示为了得到结果用了线程)
 //        getJokeStringSync(retrofitApi);
@@ -155,12 +155,12 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
      * @param retrofitApi
      */
     private void getJoke(RetrofitApi retrofitApi) {
-        Call<JokeVo> call = retrofitApi.getJoke(Constants.JUHE_APPKEY_JOKE);
-        call.enqueue(new Callback<JokeVo>() {
+        Call<Jokes> call = retrofitApi.getJoke(Constants.JUHE_APPKEY_JOKE);
+        call.enqueue(new Callback<Jokes>() {
             @Override
-            public void onResponse(Call<JokeVo> call, Response<JokeVo> response) {
+            public void onResponse(Call<Jokes> call, Response<Jokes> response) {
                 if (response.isSuccessful()) {
-                    List<JokeVo.ResultBean.DataBean> data = response.body().getResult().getData();
+                    List<Jokes.ResultBean.DataBean> data = response.body().getResult().getData();
                     if (data.size() > 0) {
                         String body = data.get(0).getContent();
                         mBinding.tvResult.setText("一般的get请求 \n" + body);
@@ -169,7 +169,7 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
             }
 
             @Override
-            public void onFailure(Call<JokeVo> call, Throwable t) {
+            public void onFailure(Call<Jokes> call, Throwable t) {
                 Toast.makeText(RetrofitActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -209,12 +209,12 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
      * @param retrofitApi
      */
     private void getJokeUseUrl(RetrofitApi retrofitApi) {
-        Call<JokeVo> call = retrofitApi.getJokeUseUrl("http://japi.juhe.cn/joke/content/text.from", Constants.JUHE_APPKEY_JOKE);
-        call.enqueue(new Callback<JokeVo>() {
+        Call<Jokes> call = retrofitApi.getJokeUseUrl("http://japi.juhe.cn/joke/content/text.from", Constants.JUHE_APPKEY_JOKE);
+        call.enqueue(new Callback<Jokes>() {
             @Override
-            public void onResponse(Call<JokeVo> call, Response<JokeVo> response) {
+            public void onResponse(Call<Jokes> call, Response<Jokes> response) {
                 if (response.isSuccessful()) {
-                    List<JokeVo.ResultBean.DataBean> data = response.body().getResult().getData();
+                    List<Jokes.ResultBean.DataBean> data = response.body().getResult().getData();
                     if (data.size() > 0) {
                         String body = data.get(0).getContent();
                         mBinding.tvResult.setText("@Url注解，调用的时候再填充url \n" + body);
@@ -223,7 +223,7 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
             }
 
             @Override
-            public void onFailure(Call<JokeVo> call, Throwable t) {
+            public void onFailure(Call<Jokes> call, Throwable t) {
                 Toast.makeText(RetrofitActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -237,12 +237,12 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
     private void getJokeUseMap(RetrofitApi retrofitApi) {
         HashMap<String, String> params = new HashMap<>();
         params.put("key", Constants.JUHE_APPKEY_JOKE);
-        Call<JokeVo> call = retrofitApi.getJokeUseMap(params);
-        call.enqueue(new Callback<JokeVo>() {
+        Call<Jokes> call = retrofitApi.getJokeUseMap(params);
+        call.enqueue(new Callback<Jokes>() {
             @Override
-            public void onResponse(Call<JokeVo> call, Response<JokeVo> response) {
+            public void onResponse(Call<Jokes> call, Response<Jokes> response) {
                 if (response.isSuccessful()) {
-                    List<JokeVo.ResultBean.DataBean> data = response.body().getResult().getData();
+                    List<Jokes.ResultBean.DataBean> data = response.body().getResult().getData();
                     if (data.size() > 0) {
                         String body = data.get(0).getContent();
                         mBinding.tvResult.setText("get请求，参数多时使用map \n" + body);
@@ -251,7 +251,7 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
             }
 
             @Override
-            public void onFailure(Call<JokeVo> call, Throwable t) {
+            public void onFailure(Call<Jokes> call, Throwable t) {
                 Toast.makeText(RetrofitActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -263,12 +263,12 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
      * @param retrofitApi
      */
     private void getJokeUseMultiValue(RetrofitApi retrofitApi) {
-        Call<JokeVo> call = retrofitApi.getJokeUseMultiValue(Constants.JUHE_APPKEY_JOKE);
-        call.enqueue(new Callback<JokeVo>() {
+        Call<Jokes> call = retrofitApi.getJokeUseMultiValue(Constants.JUHE_APPKEY_JOKE);
+        call.enqueue(new Callback<Jokes>() {
             @Override
-            public void onResponse(Call<JokeVo> call, Response<JokeVo> response) {
+            public void onResponse(Call<Jokes> call, Response<Jokes> response) {
                 if (response.isSuccessful()) {
-                    List<JokeVo.ResultBean.DataBean> data = response.body().getResult().getData();
+                    List<Jokes.ResultBean.DataBean> data = response.body().getResult().getData();
                     if (data.size() > 0) {
                         String body = data.get(0).getContent();
                         mBinding.tvResult.setText("get请求一个参数键，对应...paramType多个值 \n" + body);
@@ -277,7 +277,7 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
             }
 
             @Override
-            public void onFailure(Call<JokeVo> call, Throwable t) {
+            public void onFailure(Call<Jokes> call, Throwable t) {
                 Toast.makeText(RetrofitActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -289,12 +289,12 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
      * @param retrofitApi
      */
     private void getJokeUseVar(RetrofitApi retrofitApi) {
-        Call<JokeVo> call = retrofitApi.getJokeUseVar("text.from", Constants.JUHE_APPKEY_JOKE);
-        call.enqueue(new Callback<JokeVo>() {
+        Call<Jokes> call = retrofitApi.getJokeUseVar("text.from", Constants.JUHE_APPKEY_JOKE);
+        call.enqueue(new Callback<Jokes>() {
             @Override
-            public void onResponse(Call<JokeVo> call, Response<JokeVo> response) {
+            public void onResponse(Call<Jokes> call, Response<Jokes> response) {
                 if (response.isSuccessful()) {
-                    List<JokeVo.ResultBean.DataBean> data = response.body().getResult().getData();
+                    List<Jokes.ResultBean.DataBean> data = response.body().getResult().getData();
                     if (data.size() > 0) {
                         String body = data.get(0).getContent();
                         mBinding.tvResult.setText("get请求，path中使用变量占位符 \n" + body);
@@ -303,7 +303,7 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
             }
 
             @Override
-            public void onFailure(Call<JokeVo> call, Throwable t) {
+            public void onFailure(Call<Jokes> call, Throwable t) {
                 Toast.makeText(RetrofitActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -317,12 +317,12 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
      * @param retrofitApi
      */
     private void postJoke(RetrofitApi retrofitApi) {
-        Call<JokeVo> call = retrofitApi.postJoke(Constants.JUHE_APPKEY_JOKE);
-        call.enqueue(new Callback<JokeVo>() {
+        Call<Jokes> call = retrofitApi.postJoke(Constants.JUHE_APPKEY_JOKE);
+        call.enqueue(new Callback<Jokes>() {
             @Override
-            public void onResponse(Call<JokeVo> call, Response<JokeVo> response) {
+            public void onResponse(Call<Jokes> call, Response<Jokes> response) {
                 if (response.isSuccessful()) {
-                    List<JokeVo.ResultBean.DataBean> data = response.body().getResult().getData();
+                    List<Jokes.ResultBean.DataBean> data = response.body().getResult().getData();
                     if (data.size() > 0) {
                         String body = data.get(0).getContent();
                         mBinding.tvResult.setText("一般的post请求 \n" + body);
@@ -331,7 +331,7 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
             }
 
             @Override
-            public void onFailure(Call<JokeVo> call, Throwable t) {
+            public void onFailure(Call<Jokes> call, Throwable t) {
                 Toast.makeText(RetrofitActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

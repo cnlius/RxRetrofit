@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.google.gson.JsonParseException;
 import com.ls.rxretrofit.custom.LoadingManager;
+import com.ls.rxretrofit.vo.HttpResult;
 
 import org.json.JSONException;
 
@@ -22,7 +23,7 @@ import retrofit2.HttpException;
  * Created by liusong on 2018/1/8.
  */
 
-public abstract class HttpSubscriber<T> implements Observer<T> {
+public abstract class HttpSubscriber<T> implements Observer<HttpResult<T>> {
     private WeakReference<Context> context;
     private boolean isHasProgress; //是否显示loading框,context!=null时显示；
 
@@ -43,8 +44,8 @@ public abstract class HttpSubscriber<T> implements Observer<T> {
     }
 
     @Override
-    public void onNext(T t) {
-        onSuccess(t);
+    public void onNext(HttpResult<T> httpResult) {
+        onSuccess(httpResult.getResult());
     }
 
     @Override

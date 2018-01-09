@@ -2,7 +2,7 @@ package com.ls.rxretrofit.api;
 
 import android.support.annotation.NonNull;
 
-import com.ls.rxretrofit.vo.JokeVo;
+import com.ls.rxretrofit.vo.Jokes;
 
 import java.util.Map;
 
@@ -50,7 +50,7 @@ public interface RetrofitApi {
     //【get请求】
     //一般的get请求
     @GET("http://japi.juhe.cn/joke/content/text.from")
-    Call<JokeVo> getJoke(
+    Call<Jokes> getJoke(
             @NonNull @Query("key") String appKey
     );
 
@@ -62,26 +62,26 @@ public interface RetrofitApi {
 
     //get请求，参数多时使用map
     @GET("http://japi.juhe.cn/joke/content/text.from")
-    Call<JokeVo> getJokeUseMap(
+    Call<Jokes> getJokeUseMap(
             @QueryMap Map<String, String> params
     );
 
     //get请求，@Query参数，一个键对应多个值
     @GET("http://japi.juhe.cn/joke/content/text.from")
-    Call<JokeVo> getJokeUseMultiValue(
+    Call<Jokes> getJokeUseMultiValue(
             @NonNull @Query("key") String... appKey
     );
 
     //@Url注解，调用的时候再填充url
     @GET
-    Call<JokeVo> getJokeUseUrl(
+    Call<Jokes> getJokeUseUrl(
             @Url String url,
             @NonNull @Query("key") String appKey
     );
 
     //path中使用变量占位符(http://japi.juhe.cn/joke/content/text.from)
     @GET("http://japi.juhe.cn/joke/content/{suffix}")
-    Call<JokeVo> getJokeUseVar(
+    Call<Jokes> getJokeUseVar(
             @Path("suffix") String suffix,
             @NonNull @Query("key") String appKey
     );
@@ -91,7 +91,7 @@ public interface RetrofitApi {
     //一般的post请求（post请求以表单的形式）
     @FormUrlEncoded
     @POST("http://japi.juhe.cn/joke/content/text.from")
-    Call<JokeVo> postJoke(
+    Call<Jokes> postJoke(
             @NonNull @Field("key") String appKey
     );
 

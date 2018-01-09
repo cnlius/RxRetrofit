@@ -9,82 +9,52 @@ import java.util.List;
 
 public class JokeVo {
 
-    private int error_code;
-    private String reason;
-    private ResultBean result;
+    private List<DataBean> data;
 
-    public int getError_code() {
-        return error_code;
+    public List<DataBean> getData() {
+        return data;
     }
 
-    public void setError_code(int error_code) {
-        this.error_code = error_code;
+    public void setData(List<DataBean> data) {
+        this.data = data;
     }
 
-    public String getReason() {
-        return reason;
-    }
+    public static class DataBean {
+        private String content;
+        private String hashId;
+        private int unixtime;
+        private String updatetime;
 
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public ResultBean getResult() {
-        return result;
-    }
-
-    public void setResult(ResultBean result) {
-        this.result = result;
-    }
-
-    public static class ResultBean {
-        private List<DataBean> data;
-
-        public List<DataBean> getData() {
-            return data;
+        public String getContent() {
+            return content;
         }
 
-        public void setData(List<DataBean> data) {
-            this.data = data;
+        public void setContent(String content) {
+            this.content = content;
         }
 
-        public static class DataBean {
-            private String content;
-            private String hashId;
-            private int unixtime;
-            private String updatetime;
+        public String getHashId() {
+            return hashId;
+        }
 
-            public String getContent() {
-                return content;
-            }
+        public void setHashId(String hashId) {
+            this.hashId = hashId;
+        }
 
-            public void setContent(String content) {
-                this.content = content;
-            }
+        public int getUnixtime() {
+            return unixtime;
+        }
 
-            public String getHashId() {
-                return hashId;
-            }
+        public void setUnixtime(int unixtime) {
+            this.unixtime = unixtime;
+        }
 
-            public void setHashId(String hashId) {
-                this.hashId = hashId;
-            }
+        public String getUpdatetime() {
+            return updatetime;
+        }
 
-            public int getUnixtime() {
-                return unixtime;
-            }
-
-            public void setUnixtime(int unixtime) {
-                this.unixtime = unixtime;
-            }
-
-            public String getUpdatetime() {
-                return updatetime;
-            }
-
-            public void setUpdatetime(String updatetime) {
-                this.updatetime = updatetime;
-            }
+        public void setUpdatetime(String updatetime) {
+            this.updatetime = updatetime;
         }
     }
 }

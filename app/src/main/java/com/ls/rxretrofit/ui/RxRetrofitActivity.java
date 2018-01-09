@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
+
 import com.ls.rxretrofit.R;
 import com.ls.rxretrofit.api.RxRetrofitApi;
 import com.ls.rxretrofit.app.Constants;
 import com.ls.rxretrofit.databinding.ActivityRxRetrofitBinding;
 import com.ls.rxretrofit.http.HttpManager;
 import com.ls.rxretrofit.http.HttpSubscriber;
+import com.ls.rxretrofit.vo.HttpResult;
 import com.ls.rxretrofit.vo.JokeVo;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -38,12 +40,12 @@ public class RxRetrofitActivity extends RxAppCompatActivity implements View.OnCl
 
     private void getJokes() {
         HttpManager.getInstance().create(RxRetrofitApi.class)
-                .getJoke(Constants.JUHE_APPKEY_JOKE)
-                .compose(HttpManager.<JokeVo>handleObservable(this))
+                .getJokes(Constants.JUHE_APPKEY_JOKE)
+                .compose(HttpManager.<HttpResult<JokeVo>>handleObservable(this))
                 .subscribe(new HttpSubscriber<JokeVo>() {
                     @Override
-                    protected void onSuccess(JokeVo jokeVo) {
-                        String content = jokeVo.getResult().getData().get(0).getContent();
+                    protected void onSuccess(JokeVo jokes) {
+                        String content = jokes.getData().get(0).getContent();
                         Toast.makeText(RxRetrofitActivity.this, content, Toast.LENGTH_SHORT).show();
                     }
                 });
