@@ -20,16 +20,16 @@ public class JokeVo {
     }
 
     public static class DataBean {
-        private String content;
+        private int content;
         private String hashId;
         private int unixtime;
         private String updatetime;
 
-        public String getContent() {
+        public int getContent() {
             return content;
         }
 
-        public void setContent(String content) {
+        public void setContent(int content) {
             this.content = content;
         }
 

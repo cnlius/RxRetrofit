@@ -47,8 +47,8 @@ public class RxRetrofitActivity extends RxAppCompatActivity implements View.OnCl
                 .subscribe(new HttpSubscriber<JokeVo>(this) {
                     @Override
                     protected void onSuccess(JokeVo jokes) {
-                        String content = jokes.getData().get(0).getContent();
-                        Toast.makeText(RxRetrofitActivity.this, content, Toast.LENGTH_SHORT).show();
+//                        String content = jokes.getData().get(0).getContent();
+//                        Toast.makeText(RxRetrofitActivity.this, content, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

@@ -3,6 +3,7 @@ package com.ls.rxretrofit.http;
 import android.content.Context;
 import android.net.ParseException;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.google.gson.JsonParseException;
 import com.ls.rxretrofit.app.App;
@@ -60,6 +61,9 @@ public abstract class HttpSubscriber<T> implements Observer<HttpResult<T>> {
 
     @Override
     public void onError(Throwable e) {
+        if (isShowLoading) {
+            LoadingManager.dismissProgressDialog();
+        }
         String message;
         if (!NetworkUtils.isConnected(App.mApp.getContext())) {
             message = "没有网络";
@@ -91,6 +95,6 @@ public abstract class HttpSubscriber<T> implements Observer<HttpResult<T>> {
     protected abstract void onSuccess(T t);
 
     protected void onFailure(String message) {
-
+        Toast.makeText(App.mApp.getContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
