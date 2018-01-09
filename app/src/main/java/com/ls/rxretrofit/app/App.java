@@ -1,6 +1,7 @@
 package com.ls.rxretrofit.app;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.ls.rxretrofit.BuildConfig;
 
@@ -9,21 +10,21 @@ import com.ls.rxretrofit.BuildConfig;
  */
 
 public class App extends Application {
-    private static boolean isDebug;
-    private static Application mApp;
+    private boolean isDebug;
+    public static App mApp;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mApp = this;
         isDebug = BuildConfig.DEBUG;
-        mApp=this;
     }
 
-    public static Application getApp() {
-        return mApp;
+    public Context getContext() {
+        return mApp.getApplicationContext();
     }
 
-    public boolean isDebug(){
+    public boolean isDebug() {
         return isDebug;
     }
 

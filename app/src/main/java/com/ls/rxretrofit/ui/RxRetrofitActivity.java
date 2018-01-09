@@ -3,6 +3,7 @@ package com.ls.rxretrofit.ui;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import com.ls.rxretrofit.app.Constants;
 import com.ls.rxretrofit.databinding.ActivityRxRetrofitBinding;
 import com.ls.rxretrofit.http.HttpManager;
 import com.ls.rxretrofit.http.HttpSubscriber;
+import com.ls.rxretrofit.utils.NetworkUtils;
 import com.ls.rxretrofit.vo.HttpResult;
 import com.ls.rxretrofit.vo.JokeVo;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -42,7 +44,7 @@ public class RxRetrofitActivity extends RxAppCompatActivity implements View.OnCl
         HttpManager.getInstance().create(RxRetrofitApi.class)
                 .getJokes(Constants.JUHE_APPKEY_JOKE)
                 .compose(HttpManager.<HttpResult<JokeVo>>handleObservable(this))
-                .subscribe(new HttpSubscriber<JokeVo>() {
+                .subscribe(new HttpSubscriber<JokeVo>(true) {
                     @Override
                     protected void onSuccess(JokeVo jokes) {
                         String content = jokes.getData().get(0).getContent();
