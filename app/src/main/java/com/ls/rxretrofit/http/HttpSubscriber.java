@@ -1,5 +1,6 @@
 package com.ls.rxretrofit.http;
 
+import android.content.Context;
 import android.net.ParseException;
 import android.text.TextUtils;
 
@@ -11,6 +12,7 @@ import com.ls.rxretrofit.vo.HttpResult;
 
 import org.json.JSONException;
 
+import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -24,20 +26,30 @@ import retrofit2.HttpException;
  */
 
 public abstract class HttpSubscriber<T> implements Observer<HttpResult<T>> {
-    private boolean isShowLoading; //是否显示loading框,context!=null时显示；
+    private boolean isShowLoading; //是否显示loading框,wrContext!=null时显示；
+    private WeakReference<Context> wrContext; //弱引用
+
+    public Context getContext() {
+        return wrContext.get();
+    }
+
+    public void setWrContext(Context context) {
+        this.wrContext = new WeakReference<>(context);
+    }
 
     public HttpSubscriber() {
         this.isShowLoading = false;
     }
 
-    public HttpSubscriber(boolean isShowLoading) {
-        this.isShowLoading = isShowLoading;
+    public HttpSubscriber(Context context) {
+        setWrContext(context);
+        this.isShowLoading = true;
     }
 
     @Override
     public void onSubscribe(Disposable d) {
         if (isShowLoading) {
-            LoadingManager.showProgressDialog(App.mApp.getContext());
+            LoadingManager.showProgressDialog(getContext());
         }
     }
 

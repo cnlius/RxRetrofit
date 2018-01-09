@@ -44,7 +44,7 @@ public class RxRetrofitActivity extends RxAppCompatActivity implements View.OnCl
         HttpManager.getInstance().create(RxRetrofitApi.class)
                 .getJokes(Constants.JUHE_APPKEY_JOKE)
                 .compose(HttpManager.<HttpResult<JokeVo>>handleObservable(this))
-                .subscribe(new HttpSubscriber<JokeVo>(true) {
+                .subscribe(new HttpSubscriber<JokeVo>(this) {
                     @Override
                     protected void onSuccess(JokeVo jokes) {
                         String content = jokes.getData().get(0).getContent();
