@@ -18,6 +18,11 @@ import com.ls.rxretrofit.vo.HttpResult;
 import com.ls.rxretrofit.vo.JokeVo;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import java.util.HashMap;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by Jason on 2018/1/7.
  */
@@ -41,14 +46,40 @@ public class RxRetrofitActivity extends RxAppCompatActivity implements View.OnCl
     }
 
     private void getJokes() {
+//        HttpManager.getInstance().create(RxRetrofitApi.class)
+//                .getJokes(Constants.JUHE_APPKEY_JOKE)
+//                .compose(HttpManager.<HttpResult<JokeVo>>handleObservable(this))
+//                .subscribe(new HttpSubscriber<JokeVo>(this) {
+//                    @Override
+//                    protected void onSuccess(JokeVo jokes) {
+//                        String content = jokes.getData().get(0).getContent();
+//                        Toast.makeText(RxRetrofitActivity.this, content, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
         HttpManager.getInstance().create(RxRetrofitApi.class)
-                .getJokes(Constants.JUHE_APPKEY_JOKE)
-                .compose(HttpManager.<HttpResult<JokeVo>>handleObservable(this))
-                .subscribe(new HttpSubscriber<JokeVo>(this) {
+                .test("17629294728","123456")
+                .compose(HttpManager.<HashMap<String,String>>handleObservable(this))
+                .subscribe(new Observer<HashMap<String,String>>() {
                     @Override
-                    protected void onSuccess(JokeVo jokes) {
-                        String content = jokes.getData().get(0).getContent();
-                        Toast.makeText(RxRetrofitActivity.this, content, Toast.LENGTH_SHORT).show();
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(HashMap<String,String> s) {
+                        String token=s.get("token");
+                        Toast.makeText(RxRetrofitActivity.this, ""+token, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(RxRetrofitActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

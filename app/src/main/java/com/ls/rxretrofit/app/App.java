@@ -3,6 +3,7 @@ package com.ls.rxretrofit.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.stetho.Stetho;
 import com.ls.rxretrofit.BuildConfig;
 
 /**
@@ -10,14 +11,20 @@ import com.ls.rxretrofit.BuildConfig;
  */
 
 public class App extends Application {
-    private boolean isDebug;
     public static App mApp;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mApp = this;
-        isDebug = BuildConfig.DEBUG;
+
+        if(isDebug()){
+            initDebug();
+        }
+    }
+
+    private void initDebug() {
+        Stetho.initializeWithDefaults(this);
     }
 
     public Context getContext() {
@@ -25,7 +32,7 @@ public class App extends Application {
     }
 
     public boolean isDebug() {
-        return isDebug;
+        return BuildConfig.DEBUG;
     }
 
 }
